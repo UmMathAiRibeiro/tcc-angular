@@ -1,19 +1,70 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-  <a class="navbar-brand titulo" routerLink="home">
-    <img src="../../assets/logo.png" alt="" width="30" height="30" class="d-inline-block align-top" />
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" routerLink="home"><img src="../../assets/logo.png" alt="logo" width="30" height="30"
+      class="d-inline-block align-top"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+    aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+
+  <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link sair" (click)="sair()">SAIR</a>
+        <a class="nav-link" [routerLink]="[ '/home']">Home<span class="sr-only">(página
+            atual)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[ '/integrantes']">Integrantes</a>
       </li>
     </ul>
+    <nav class="justify-content-end">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+          <div class="dropleft" id="config-user-dropleft">
+            <!-- <button tye="button" class="btn btn-outline-success" id="config-user" data-toggle="dropdown"> -->
+            <i class="material-icons sair" id="config-user" data-toggle="dropdown">build</i>
+            <!-- </button> -->
+            <div class="dropdown-menu">
+              <a class="dropdown-item sair" [routerLink]="[ '/perfil']">Ver perfil</a>
+              <a class="dropdown-item sair" [routerLink]="[ '/alterarPerfil']">Mudar Dados</a>
+              <a class="dropdown-item sair" (click)="sair()">Sair</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
   </div>
 </nav>
+<!-- <nav class="navbar navbar-expand fixed-top navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item mr-4">
+          <div class="dropleft" id="config-cog-dropleft">
+            <button type="button" class="btn btn-outline-success" id="config-cog" data-toggle="dropdown">
+              Perfil
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Administrar Perfis</a>
+              <a class="dropdown-item" href="#">Adicionar Perfil</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="dropleft" id="config-user-dropleft">
+            <button type="button" class="btn btn-outline-success" id="config-user" data-toggle="dropdown">
+              config
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Ver perfil</a>
+              <a class="dropdown-item" href="#">Mudar Dados</a>
+              <a class="dropdown-item" href="#">Sair</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
 <div class="container shadow-lg p-3 mt-5 bg-white rounded">
   Olá {{usuario.nome}}! Seja bem vindo ao Família Saudavel
 </div>

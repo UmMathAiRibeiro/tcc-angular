@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+  <a class="navbar-brand" routerLink="home"><img src="../../assets/logo.png" alt="logo" width="30" height="30"
+      class="d-inline-block align-top"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+    aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[ '/home']">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="[ '/integrantes']">Integrantes<span class="sr-only">(página atual)</span></a>
+      </li>
+    </ul>
+    <nav class="justify-content-end">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+          <div class="dropleft" id="config-user-dropleft">
+            <!-- <button tye="button" class="btn btn-outline-success" id="config-user" data-toggle="dropdown"> -->
+            <i class="material-icons sair" id="config-user" data-toggle="dropdown">build</i>
+            <!-- </button> -->
+            <div class="dropdown-menu">
+              <a class="dropdown-item sair" [routerLink]="[ '/perfil']">Ver perfil</a>
+              <a class="dropdown-item sair" [routerLink]="[ '/alterarPerfil']">Mudar Dados</a>
+              <a class="dropdown-item sair" (click)="sair()">Sair</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</nav>
+<div class="container">
+  <div class="shadow p-3 mt-5 bg-light">
+    <div class="card bg-light text-dark border-0">
+      <div class="card-header text-center bg-light h2">Integrante</div>
+      <div class="card-body bg-light some-padding">
+        <form class="font120">
+          <div class="row form-group">
+            <div class="col">
+              <label for="nome-integrante" class="text-dark">Nome</label>
+              <input type="text" class="form-control text-dark font100" id="nome-integrante"
+                placeholder="Digite o nome do integrante" />
+            </div>
+            <div class="col">
+              <label for="idade-integrante">Idade</label>
+              <input type="number" class="form-control text-dark font100" id="idade-integrante"
+                placeholder="Digite a idade do integrante" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col">
+              <label for="peso-integrante">Peso</label>
+              <input type="number" class="form-control text-dark font100" id="peso-integrante" placeholder="Peso em kg">
+            </div>
+            <div class="col">
+              <label for="altura-integrante">Altura</label>
+              <input type="number" class="form-control text-dark font100" id="altura-integrante"
+                placeholder="Altura em metros" [(ngModel)]="altura" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+        </form>
+      </div> <!-- / card-body -->
+    </div> <!-- / card  -->
+  </div>
+  <div class="d-flex justify-content-end mt-4 mb-4">
+    <div class="mr-3">
+      <button type="button" class="btn btn-light border">
+        Cancelar
+      </button>
+    </div>
+    <div>
+      <button type="button" (click)="testar()" class="btn btn-success border">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div> <!-- / container -->
