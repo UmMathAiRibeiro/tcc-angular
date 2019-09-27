@@ -1,0 +1,44 @@
+<nav class="navbar fixed-top navbar-light bg-light">
+  <a class="navbar-brand titulo" routerLink="">
+    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    FAMILIA SAUDAVEL
+  </a>
+</nav>
+<div class="container shadow-lg p-3 mt-5 bg-white rounded">
+  <div class="text-center">
+    <div class="row mb-4">
+      <div class="col"></div>
+      <div class="col-6">
+        <span class="h1">SEJA BEM-VINDO</span>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="email">EMAIL</label>
+      <input type="user" class="form-control" id="email" placeholder="SEUEMAIL@EMAIL.COM" [(ngModel)]="email_log"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">SENHA</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="DIGITE SUA SENHA"
+        [(ngModel)]="senha_log" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="mb-4">
+      <a (click)="logar()" class="btn btn-success" style="color: white;">LOGAR</a>
+      <div class="float-right"><a routerLink="cadastro" class="btn btn-danger">CADASTRAR</a></div>
+    </div>
+  </form>
+  <div class="text-center">
+    <div class="h3">OQUE É O FAMILIA SAUDÁVEL?</div>
+  </div>
+  <div class="text-justify recuo">Esta sem tempo de cuidar da sua vida alimentar? O Familia Saudavel&#169; irá te
+    auxiliar a chegar em bons resultados sem se esforçar, além de ter uma qualidade de vida saudável.<br>
+    <div class="recuo"> Você poderá escolher qual seu objetivo, também irá ter uma lista de compras personalizada
+      referente a seu objetivo, receitas, fazendo com que não tenha a mesma alimentação diária, e sim variadas opções de
+      pratos, podendo também classificar os alimentos de sua preferência, além de ter um calendário controlando sua
+      alimentação diária. Cuide do seu corpo do jeito certo!
+    </div>
+  </div>
+</div>

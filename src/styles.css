@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: 'FontezinhaFofinha';
+    src: url('./assets/KGShakeitOff.ttf');
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+}
+
+.titulo {
+    font-family: 'FontezinhaFofinha';
+}
+
+.backgroundFofo {
+    background-color: #bdffcc;
+}
+
+.recuo {
+    text-indent: 4em;
+}

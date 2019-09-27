@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+  <a class="navbar-brand titulo" routerLink="home">
+    <img src="../../assets/logo.png" alt="" width="30" height="30" class="d-inline-block align-top" />
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link sair" (click)="sair()">SAIR</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container shadow-lg p-3 mt-5 bg-white rounded">
+  Olá {{usuario.nome}}! Seja bem vindo ao Família Saudavel
+</div>
