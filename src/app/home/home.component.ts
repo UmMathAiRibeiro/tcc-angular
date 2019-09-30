@@ -15,16 +15,19 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private service: BackendService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('30015')) {
+    if (localStorage.getItem('30015') && localStorage.getItem('user') && localStorage.getItem('iduser')) {
     }
     else {
-      this.router.navigate([''])
+      localStorage.removeItem('30015');
+      localStorage.removeItem('user');
+      localStorage.removeItem('iduser');
+      this.router.navigate(['']);
     }
-
   }
   sair() {
-    localStorage.removeItem('30015')
-    localStorage.removeItem('user')
+    localStorage.removeItem('30015');
+    localStorage.removeItem('user');
+    localStorage.removeItem('iduser');
     window.location.reload();
   }
 

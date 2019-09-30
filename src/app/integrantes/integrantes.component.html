@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-  <a class="navbar-brand" routerLink="home"><img src="../../assets/logo.png" alt="logo" width="30" height="30"
+  <a class="navbar-brand" routerLink="/home"><img src="../../assets/logo.png" alt="logo" width="30" height="30"
       class="d-inline-block align-top"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
     aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
@@ -43,23 +43,27 @@
             <div class="col">
               <label for="nome-integrante" class="text-dark">Nome</label>
               <input type="text" class="form-control text-dark font100" id="nome-integrante"
-                placeholder="Digite o nome do integrante" />
+                placeholder="Digite o nome do integrante" [(ngModel)]="integrante.nome" [ngModelOptions]="{standalone:
+                true}" />
             </div>
             <div class="col">
-              <label for="idade-integrante">Idade</label>
-              <input type="number" class="form-control text-dark font100" id="idade-integrante"
-                placeholder="Digite a idade do integrante" />
+              <label for="idade-integrante">Data de Nascimento</label>
+              <input type="date" class="form-control text-dark font100" id="idade-integrante"
+                placeholder="Digite a idade do integrante" [(ngModel)]="integrante.data_nasc" [ngModelOptions]="{standalone:
+                true}" />
             </div>
           </div>
           <div class="row form-group">
             <div class="col">
               <label for="peso-integrante">Peso</label>
-              <input type="number" class="form-control text-dark font100" id="peso-integrante" placeholder="Peso em kg">
+              <input type="number" class="form-control text-dark font100" id="peso-integrante"
+                [(ngModel)]="integrante.peso" [ngModelOptions]="{standalone: true}" placeholder="Peso em Kg">
             </div>
             <div class="col">
               <label for="altura-integrante">Altura</label>
               <input type="number" class="form-control text-dark font100" id="altura-integrante"
-                placeholder="Altura em metros" [(ngModel)]="altura" [ngModelOptions]="{standalone: true}">
+                placeholder="Altura em centimetros" [(ngModel)]="integrante.altura"
+                [ngModelOptions]="{standalone: true}">
             </div>
           </div>
         </form>
@@ -73,7 +77,7 @@
       </button>
     </div>
     <div>
-      <button type="button" (click)="testar()" class="btn btn-success border">
+      <button type="button" (click)="cadastroIntegrante()" class="btn btn-success border">
         Confirmar
       </button>
     </div>

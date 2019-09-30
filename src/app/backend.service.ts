@@ -22,4 +22,12 @@ export class BackendService {
 
     //home
 
+    //---------------------------------------------------
+
+    //integrante
+    cadastroIntegrante(data) {
+        return this.http.post(URL + '/cadastroIntegrante', data)
+    }
+    //---------------------------------------------------
+
 }

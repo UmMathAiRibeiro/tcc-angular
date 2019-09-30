@@ -24,6 +24,9 @@ export class CadastroComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('30015') && localStorage.getItem('user') && localStorage.getItem('iduser')) {
+      this.router.navigate(['home'])
+    }
   }
   cadastrar() {
     if (this.usuario.email && this.usuario.senha && this.usuario.confirmEmail && this.usuario.confirmSenha && this.usuario.nome) {

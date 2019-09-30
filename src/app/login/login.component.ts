@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('30015')) {
+    if (localStorage.getItem('30015') && localStorage.getItem('user') && localStorage.getItem('iduser')) {
       this.router.navigate(['home'])
     }
   }
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       this.service.logar(data).subscribe(res => {
         if (res.json().status == 200) {
           if (res.json().result[0].count == 1) {
+            localStorage.setItem('iduser', res.json().id[0].id)
             localStorage.setItem('user', res.json().nome[0].nome)
             localStorage.setItem('30015', '11100111')
             this.router.navigate(['home'])
