@@ -24,7 +24,7 @@ export class CadastroComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('30015') && localStorage.getItem('user') && localStorage.getItem('iduser')) {
+    if (localStorage.getItem('01100011') && localStorage.getItem('01110101 01110011 01100101 01110010') && localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
       this.router.navigate(['home'])
     }
   }
@@ -38,11 +38,12 @@ export class CadastroComponent implements OnInit {
           senha: this.usuario.senha,
         }
         this.service.cadastro(data).subscribe(res => {
-          if (res.json().status == 500) {
-            swal("ERRO", 'Revise os campos', 'warning')
+          if (res.json().status != 200) {
+            swal("ERRO", 'Ocorreu algum erro em nossos servidores, entre em contado com o suporte', 'error')
           } else {
-            swal("SUCESSO", 'Cadastro feito com sucesso', "success")
-            this.router.navigate(['']);
+            if (res.json().email) {
+              swal('ERRO', 'Este email já está em uso', 'warning')
+            }
           }
         })
 

@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('30015') && localStorage.getItem('user') && localStorage.getItem('iduser')) {
+    if (localStorage.getItem('01100011') && localStorage.getItem('01110101 01110011 01100101 01110010') && localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
       this.router.navigate(['home'])
     }
   }
@@ -29,14 +29,17 @@ export class LoginComponent implements OnInit {
       }
 
       this.service.logar(data).subscribe(res => {
-        if (res.json().status == 200) {
-          if (res.json().result[0].count == 1) {
-            localStorage.setItem('iduser', res.json().id[0].id)
-            localStorage.setItem('user', res.json().nome[0].nome)
-            localStorage.setItem('30015', '11100111')
+        if (res.json().status === 500) {
+          swal('ERRO', 'Ocorreu um erro em nossos servidos, entre em contato com o suporte :' + res.json().err.code, 'error')
+        } else {
+          if (res.json().logado) {
+            localStorage.setItem('01100011', '01101100 01101111 01100111 01100001 01100100 01101111');
+            localStorage.setItem('01110101 01110011 01100101 01110010', res.json().usuario);
+            localStorage.setItem('01101001 01100100 01110101 01110011 01100101 01110010', res.json().iduser);
             this.router.navigate(['home'])
-          } else {
-            swal('Atenção', 'Email ou senha incorretos', 'warning')
+          }
+          if (res.json().errado) {
+            swal('ERRO', res.json().errado, 'warning');
           }
         }
       })
