@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/home"><img src="../../assets/logo.png" alt="logo" width="30" height="30"
       class="d-inline-block align-top"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
@@ -12,7 +12,8 @@
         <a class="nav-link" [routerLink]="[ '/home']">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="[ '/integrantes']">Integrantes<span class="sr-only">(página atual)</span></a>
+        <a class="nav-link" [routerLink]="[ '/integrantes']">Integrantes<span class="sr-only">(página
+            atual)</span></a>
       </li>
     </ul>
     <nav class="justify-content-end">
@@ -33,53 +34,165 @@
     </nav>
   </div>
 </nav>
-<div class="container">
-  <div class="shadow p-3 mt-5 bg-light">
-    <div class="card bg-light text-dark border-0">
-      <div class="card-header text-center bg-light h2">Integrante</div>
-      <div class="card-body bg-light some-padding">
-        <form class="font120">
-          <div class="row form-group">
-            <div class="col">
-              <label for="nome-integrante" class="text-dark">Nome</label>
-              <input type="text" class="form-control text-dark font100" id="nome-integrante"
-                placeholder="Digite o nome do integrante" [(ngModel)]="integrante.nome" [ngModelOptions]="{standalone:
+<ul class="nav fixed-bottom  nav-tabs bg-light" id="myTab" role="tablist" style="justify-content:center;">
+  <li class="nav-item">
+    <a class="nav-link text-dark" id="AddIntegrante-tab" data-toggle="tab" href="#AddIntegrante" role="tab"
+      aria-controls="AddIntegrante" aria-selected="true">Adicionar integrante</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active text-dark" id="Integrantes-tab" data-toggle="tab" href="#Integrantes" role="tab"
+      aria-controls="Integrantes" aria-selected="false">Integrantes</a>
+  </li>
+</ul>
+<div class="content">
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="AddIntegrante" role="tabpanel" aria-labelledby="AddIntegrante-tab">
+      <div class="container">
+        <div class="shadow p-3 mt-5 bg-light">
+          <div class="card bg-light text-dark border-0">
+            <div class="card-header text-center bg-light h2">Adicionar integrante</div>
+            <div class="card-body bg-light some-padding">
+              <form class="font120">
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="nome-integrante" class="text-dark">Nome</label>
+                    <input type="text" class="form-control text-dark font100" id="nome-integrante"
+                      placeholder="Digite o nome do integrante" [(ngModel)]="integrante.nome" [ngModelOptions]="{standalone:
                 true}" />
+                  </div>
+                  <div class="col">
+                    <label for="idade-integrante">Data de Nascimento</label>
+                    <input type="date" class="form-control text-dark font100" id="idade-integrante"
+                      placeholder="Digite a idade do integrante" [(ngModel)]="integrante.data_nasc" [ngModelOptions]="{standalone:
+                true}" />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="peso-integrante">Peso</label>
+                    <input type="number" class="form-control text-dark font100" id="peso-integrante"
+                      [(ngModel)]="integrante.peso" [ngModelOptions]="{standalone: true}" placeholder="Peso em Kg">
+                  </div>
+                  <div class="col">
+                    <label for="altura-integrante">Altura</label>
+                    <input type="number" class="form-control text-dark font100" id="altura-integrante"
+                      placeholder="Altura em centimetros" [(ngModel)]="integrante.altura"
+                      [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+              </form>
+            </div> <!-- / card-body -->
+          </div> <!-- / card  -->
+        </div>
+        <div class="d-flex justify-content-end mt-4 mb-4">
+          <div class="mr-3">
+            <button type="button" class="btn btn-light border">
+              Cancelar
+            </button>
+          </div>
+          <div>
+            <button type="button" (click)="cadastroIntegrante()" class="btn btn-success border">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div> <!-- / container -->
+    </div>
+    <div class="tab-pane fade show active" id="Integrantes" role="tabpanel" aria-labelledby="Integrantes-tab">
+      <!-- MODAL EDITAR INTEGRANTE -->
+      <button type="button" class="btn btn-primary" hidden id="btnModalEditar" data-toggle="modal"
+        data-target="#modalEditar">
+        Abrir modal de edição
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">{{integranteAtual[0].nome}}</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="col">
-              <label for="idade-integrante">Data de Nascimento</label>
-              <input type="date" class="form-control text-dark font100" id="idade-integrante"
-                placeholder="Digite a idade do integrante" [(ngModel)]="integrante.data_nasc" [ngModelOptions]="{standalone:
-                true}" />
+            <div class="modal-body">
+              <form class="font120">
+                <h5>Atualize o peso/altura do integrante</h5>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="peso-integrante">Peso</label>
+                    <input type="number" class="form-control text-dark font100" id="peso-integrante"
+                      placeholder="Peso em Kg" #pesoAtual [value]="integranteAtual[0].peso">
+                  </div>
+                  <div class="col">
+                    <label for="altura-integrante">Altura</label>
+                    <input type="number" class="form-control text-dark font100" id="altura-integrante"
+                      placeholder="Altura em centimetros" #alturaAtual [value]="integranteAtual[0].altura">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-success" (click)="atualizarIntegrante(integranteAtual[0].id)">Salvar
+                mudanças</button>
             </div>
           </div>
-          <div class="row form-group">
-            <div class="col">
-              <label for="peso-integrante">Peso</label>
-              <input type="number" class="form-control text-dark font100" id="peso-integrante"
-                [(ngModel)]="integrante.peso" [ngModelOptions]="{standalone: true}" placeholder="Peso em Kg">
+        </div>
+      </div>
+      <!-- /MODAL EDITAR INTEGRANTE -->
+      <div class="container">
+        <!-- <table class="table font120 shadow p-3 mt-5 bg-light">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Altura</th>
+              <th scope="col">Peso</th>
+              <th scope="col">Objetivo</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let integrante of integrantes">
+              <td>{{integrante.nome}}</td>
+              <td>{{integrante.altura}}</td>
+              <td>{{integrante.peso}}</td>
+              <td>{{integrante.objetivo}}</td>
+              <td><a class="btn btn-success text-white" (click)="modalEditar(integrante)">Editar</a></td>
+            </tr>
+          </tbody>
+        </table> -->
+        <div class="shadow p-3 mt-5 bg-light">
+          <div class="card bg-light text-dark border-0">
+            <div class="card-header text-center bg-light h2">Integrantes</div>
+            <div *ngIf="this.integrantes.length > 0" class="card-body bg-light some-padding">
+              <div class="row">
+                <div class="card m-1" *ngFor="let integrante of integrantes" style="max-width: 21rem;">
+                  <div class="card-header h5">{{integrante.nome}}</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Objetivo: {{integrante.objetivo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{integrante.classificacao}}</h6>
+                    <div class="card-text">
+                      Peso atual: {{integrante.peso}} kg<br />
+                      Altura atual: {{integrante.altura}} cm<br />
+                      <div *ngIf="integrante.objetivo != 'Manter peso'">
+                        Peso ideal: {{integrante.peso_ideal}} kg<br />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-right">
+                    <a class="btn btn-success text-white pointer mr-2" (click)="modalEditar(integrante)">Editar</a>
+                    <a class="btn btn-danger pointer text-white" (click)="deletarIntegrante(integrante.id)">Excluir</a>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- / card-body -->
+            <div *ngIf="!this.integrantes.length > 0" class="card-body bg-light some-padding text-center">
+              <button class="btn btn-success" (click)="redirecionarAddIntegrante()">+ Add integrante</button>
             </div>
-            <div class="col">
-              <label for="altura-integrante">Altura</label>
-              <input type="number" class="form-control text-dark font100" id="altura-integrante"
-                placeholder="Altura em centimetros" [(ngModel)]="integrante.altura"
-                [ngModelOptions]="{standalone: true}">
-            </div>
-          </div>
-        </form>
-      </div> <!-- / card-body -->
-    </div> <!-- / card  -->
-  </div>
-  <div class="d-flex justify-content-end mt-4 mb-4">
-    <div class="mr-3">
-      <button type="button" class="btn btn-light border">
-        Cancelar
-      </button>
-    </div>
-    <div>
-      <button type="button" (click)="cadastroIntegrante()" class="btn btn-success border">
-        Confirmar
-      </button>
+          </div> <!-- / card  -->
+        </div>
+      </div>
     </div>
   </div>
-</div> <!-- / container -->
+</div>

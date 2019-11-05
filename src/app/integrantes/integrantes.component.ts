@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 import swal from 'sweetalert';
@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 export class IntegrantesComponent implements OnInit {
 
   public integrante = {
-    iduser: localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010'),
+    iduser: sessionStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010'),
     nome: null,
     altura: null,
     peso: null,
@@ -19,24 +19,42 @@ export class IntegrantesComponent implements OnInit {
     imc: null,
     classificacao: null,
     objetivo: null
-  }
+  };
+
+  @ViewChild('pesoAtual') pesoAtual: ElementRef;
+  @ViewChild('alturaAtual') alturaAtual: ElementRef;
+  public integrantes = [];
+  public integranteAtual = [this.integrante];
+  public nenhumIntegrante: boolean;
 
   constructor(private router: Router, private service: BackendService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('01100011') && localStorage.getItem('01110101 01110011 01100101 01110010') && localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
-    }
-    else {
-      localStorage.removeItem('01100011')
-      localStorage.removeItem('user')
-      localStorage.removeItem('iduser')
+    if (!sessionStorage.getItem('01100011') && !sessionStorage.getItem('01110101 01110011 01100101 01110010')
+      && !sessionStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
+      sessionStorage.removeItem('01100011')
+      sessionStorage.removeItem('01110101 01110011 01100101 01110010')
+      sessionStorage.removeItem('01101001 01100100 01110101 01110011 01100101 01110010')
       this.router.navigate([''])
     }
+    let data = {
+      iduser: sessionStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')
+    }
+    this.service.listarIntegrantes(data).subscribe(res => {
+      if (res.json().status == 500) {
+        swal("ERRO", 'Ocorreu um erro em nossos servidores por favor contate o suporte', 'erro')
+      } else {
+        res.json().result.forEach(integrante => {
+          integrante['peso_ideal'] = Math.round(21 * (Math.pow(integrante.altura * 0.01, 2)));
+          this.integrantes.push(integrante);
+        });
+      }
+    })
   }
   sair() {
-    localStorage.removeItem('01100011')
-    localStorage.removeItem('user')
-    localStorage.removeItem('iduser')
+    sessionStorage.removeItem('01100011')
+    sessionStorage.removeItem('01110101 01110011 01100101 01110010')
+    sessionStorage.removeItem('01101001 01100100 01110101 01110011 01100101 01110010')
     window.location.reload();
   }
   cadastroIntegrante() {
@@ -47,7 +65,9 @@ export class IntegrantesComponent implements OnInit {
         if (res.json().status == 500) {
           swal("ERRO", 'Ocorreu um erro em nossos servidores, por favor contate o suporte', 'erro')
         } else {
-          swal("SUCESSO", 'Cadastro feito com sucesso', "success")
+          swal("SUCESSO", 'Cadastro feito com sucesso', "success").then(() => {
+            window.location.reload();
+          })
         }
       })
     } else {
@@ -79,5 +99,91 @@ export class IntegrantesComponent implements OnInit {
       this.integrante.classificacao = "Obesidade 3(mórbida)"
       this.integrante.objetivo = "Perder peso"
     }
+  }
+
+  atualizarImc(peso, altura) {
+    this.integranteAtual[0].imc = peso / Math.pow((altura * 0.01), 2);// Calcula o IMC do integrante
+    if (this.integranteAtual[0].imc < 17) {
+      this.integranteAtual[0].classificacao = "Muito abaixo do peso"
+      this.integranteAtual[0].objetivo = "Ganhar peso"
+    } else if (this.integranteAtual[0].imc >= 17 && this.integranteAtual[0].imc < 18.5) {
+      this.integranteAtual[0].classificacao = "Abaixo do peso"
+      this.integranteAtual[0].objetivo = "Ganhar peso"
+    } else if (this.integranteAtual[0].imc >= 18.5 && this.integranteAtual[0].imc < 25) {
+      this.integranteAtual[0].classificacao = "Peso normal"
+      this.integranteAtual[0].objetivo = "Manter peso"
+    } else if (this.integranteAtual[0].imc >= 25 && this.integranteAtual[0].imc < 30) {
+      this.integranteAtual[0].classificacao = "Acima do peso"
+      this.integranteAtual[0].objetivo = "Perder peso"
+    } else if (this.integranteAtual[0].imc >= 30 && this.integranteAtual[0].imc < 35) {
+      this.integranteAtual[0].classificacao = "Obesidade 1"
+      this.integranteAtual[0].objetivo = "Perder peso"
+    } else if (this.integranteAtual[0].imc >= 35 && this.integranteAtual[0].imc < 40) {
+      this.integranteAtual[0].classificacao = "Obesidade 2(severa)"
+      this.integranteAtual[0].objetivo = "Perder peso"
+    } else if (this.integranteAtual[0].imc >= 40) {
+      this.integranteAtual[0].classificacao = "Obesidade 3(mórbida)"
+      this.integranteAtual[0].objetivo = "Perder peso"
+    }
+  }
+
+  modalEditar(integrante) {
+    this.integranteAtual = [integrante]
+    document.getElementById("btnModalEditar").click();
+  }
+
+  atualizarIntegrante(id) {
+    var peso = this.pesoAtual.nativeElement.value
+    var altura = this.alturaAtual.nativeElement.value
+    if (peso && altura) {
+      this.atualizarImc(peso, altura)
+      let data = {
+        id: id,
+        peso: peso,
+        altura: altura,
+        imc: this.integranteAtual[0].imc,
+        classificacao: this.integranteAtual[0].classificacao,
+        objetivo: this.integranteAtual[0].objetivo,
+      }
+      console.log(data)
+      this.service.atualizarIntegrante(data).subscribe(res => {
+        if (res.json().status == 500) {
+          swal("ERRO", 'Ocorreu um erro em nossos servidores, por favor contate o suporte', 'error')
+        } else {
+          swal("SUCESSO", 'Integrante atualizado com sucesso', "success").then(() => {
+            window.location.reload();
+          })
+        }
+      })
+    } else {
+      swal('ERRO', 'Preencha todos os campos', 'warning');
+    }
+  }
+
+  deletarIntegrante(idintegrante) {
+    swal({
+      title: "Você tem certeza?",
+      text: "Ao apertar em 'OK', você irá deletar o integrante (essa ação é irreversível)",
+      icon: "warning",
+      buttons: ['Cancelar', true],
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.service.deletarIntegrante(idintegrante).subscribe(res => {
+            if (res.json().status == 500) {
+              swal("ERRO", 'Ocorreu um erro em nossos servidores, por favor contate o suporte', 'error')
+            } else {
+              swal("SUCESSO", "Integrante deletado com sucesso", "success").then(() => {
+                window.location.reload();
+              })
+            }
+          })
+        }
+      });
+  }
+
+  redirecionarAddIntegrante() {
+    document.getElementById("AddIntegrante-tab").click()
   }
 }

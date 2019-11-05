@@ -10,24 +10,24 @@ import { BackendService } from '../backend.service';
 
 export class HomeComponent implements OnInit {
   public usuario = {
-    nome: localStorage.getItem('01110101 01110011 01100101 01110010')
+    nome: sessionStorage.getItem('01110101 01110011 01100101 01110010')
   }
   constructor(private router: Router, private service: BackendService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('01100011') && localStorage.getItem('01110101 01110011 01100101 01110010') && localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
+    if (sessionStorage.getItem('01100011') && sessionStorage.getItem('01110101 01110011 01100101 01110010') && sessionStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
     }
     else {
-      localStorage.removeItem('01100011');
-      localStorage.removeItem('user');
-      localStorage.removeItem('iduser');
+      sessionStorage.removeItem('01100011');
+      sessionStorage.removeItem('user');
+      sessionStorage.removeItem('iduser');
       this.router.navigate(['']);
     }
   }
   sair() {
-    localStorage.removeItem('01100011');
-    localStorage.removeItem('user');
-    localStorage.removeItem('iduser');
+    sessionStorage.removeItem('01100011');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('iduser');
     this.router.navigate(['']);
   }
 

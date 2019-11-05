@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('01100011') && localStorage.getItem('01110101 01110011 01100101 01110010') && localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
+    if (sessionStorage.getItem('01100011') && sessionStorage.getItem('01110101 01110011 01100101 01110010') && sessionStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
       this.router.navigate(['home'])
     }
   }
@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
           swal('ERRO', 'Ocorreu um erro em nossos servidos, entre em contato com o suporte :' + res.json().err.code, 'error')
         } else {
           if (res.json().logado) {
-            localStorage.setItem('01100011', '01101100 01101111 01100111 01100001 01100100 01101111');
-            localStorage.setItem('01110101 01110011 01100101 01110010', res.json().usuario);
-            localStorage.setItem('01101001 01100100 01110101 01110011 01100101 01110010', res.json().iduser);
+            sessionStorage.setItem('01100011', '01101100 01101111 01100111 01100001 01100100 01101111');
+            sessionStorage.setItem('01110101 01110011 01100101 01110010', res.json().usuario);
+            sessionStorage.setItem('01101001 01100100 01110101 01110011 01100101 01110010', res.json().iduser);
             this.router.navigate(['home'])
           }
           if (res.json().errado) {

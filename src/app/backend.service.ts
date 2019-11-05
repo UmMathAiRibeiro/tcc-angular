@@ -13,10 +13,10 @@ export class BackendService {
 
     //login
     logar(data) {
-        return this.http.post(URL + '/login', data)
+        return this.http.post(URL + '/login', data);
     }
     cadastro(data) {
-        return this.http.post(URL + '/cadastro', data)
+        return this.http.post(URL + '/cadastro', data);
     }
     //---------------------------------------------------
 
@@ -26,7 +26,16 @@ export class BackendService {
 
     //integrante
     cadastroIntegrante(data) {
-        return this.http.post(URL + '/cadastroIntegrante', data)
+        return this.http.post(URL + '/cadastroIntegrante', data);
+    }
+    listarIntegrantes(data) {
+        return this.http.post(URL + '/listarIntegrantes', data);
+    }
+    atualizarIntegrante(data) {
+        return this.http.put(URL + "/atualizarIntegrante", data);
+    }
+    deletarIntegrante(id) {
+        return this.http.delete(`${URL}/deletarIntegrante/${id}`)
     }
     //---------------------------------------------------
 

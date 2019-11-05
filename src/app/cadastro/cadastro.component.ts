@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../backend.service';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-cadastro',
@@ -24,7 +23,7 @@ export class CadastroComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('01100011') && localStorage.getItem('01110101 01110011 01100101 01110010') && localStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
+    if (sessionStorage.getItem('01100011') && sessionStorage.getItem('01110101 01110011 01100101 01110010') && sessionStorage.getItem('01101001 01100100 01110101 01110011 01100101 01110010')) {
       this.router.navigate(['home'])
     }
   }
@@ -43,6 +42,10 @@ export class CadastroComponent implements OnInit {
           } else {
             if (res.json().email) {
               swal('ERRO', 'Este email já está em uso', 'warning')
+            } else {
+              swal('SUCESSO', 'Cadastro feito com sucesso', 'success').then(() => {
+                this.router.navigate([''])
+              })
             }
           }
         })

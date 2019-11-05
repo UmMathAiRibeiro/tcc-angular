@@ -16,7 +16,7 @@ import { IntegrantesComponent } from './integrantes/integrantes.component';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
-    IntegrantesComponent
+    IntegrantesComponent,
   ],
   imports: [
     BrowserModule,
