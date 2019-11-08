@@ -1,18 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { BackendService } from "../backend.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  selector: "app-receitas",
+  templateUrl: "./receitas.component.html",
+  styleUrls: ["./receitas.component.css"]
 })
-export class HomeComponent implements OnInit {
-  public usuario = {
-    nome: sessionStorage.getItem("01110101 01110011 01100101 01110010")
-  };
-
+export class ReceitasComponent implements OnInit {
   constructor(private service: BackendService, private router: Router) {}
+
   ngOnInit() {
     if (
       !sessionStorage.getItem("01100011") &&

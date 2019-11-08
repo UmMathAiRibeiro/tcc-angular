@@ -15,6 +15,12 @@
         <a class="nav-link" [routerLink]="[ '/integrantes']">Integrantes<span class="sr-only">(página
             atual)</span></a>
       </li>
+      <li class="nav-item">
+        <a [routerLink]="['/alimentacao']" class="nav-link">Alimentação</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/receitas']" class="nav-link">Receitas</a>
+      </li>
     </ul>
     <nav class="justify-content-end">
       <ul class="nav navbar-nav ml-auto">
@@ -91,7 +97,7 @@
             </button>
           </div>
           <div>
-            <button type="button" (click)="cadastroIntegrante()" class="btn btn-success border">
+            <button type="submit" (click)="cadastroIntegrante()" class="btn btn-success border">
               Confirmar
             </button>
           </div>
@@ -134,7 +140,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-success" (click)="atualizarIntegrante(integranteAtual[0].id)">Salvar
+              <button type="button" class="btn btn-success"
+                (click)="atualizarIntegrante(integranteAtual[0]['id'])">Salvar
                 mudanças</button>
             </div>
           </div>
@@ -142,26 +149,6 @@
       </div>
       <!-- /MODAL EDITAR INTEGRANTE -->
       <div class="container">
-        <!-- <table class="table font120 shadow p-3 mt-5 bg-light">
-          <thead>
-            <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Altura</th>
-              <th scope="col">Peso</th>
-              <th scope="col">Objetivo</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let integrante of integrantes">
-              <td>{{integrante.nome}}</td>
-              <td>{{integrante.altura}}</td>
-              <td>{{integrante.peso}}</td>
-              <td>{{integrante.objetivo}}</td>
-              <td><a class="btn btn-success text-white" (click)="modalEditar(integrante)">Editar</a></td>
-            </tr>
-          </tbody>
-        </table> -->
         <div class="shadow p-3 mt-5 bg-light">
           <div class="card bg-light text-dark border-0">
             <div class="card-header text-center bg-light h2">Integrantes</div>
@@ -187,7 +174,7 @@
                 </div>
               </div>
             </div> <!-- / card-body -->
-            <div *ngIf="!this.integrantes.length > 0" class="card-body bg-light some-padding text-center">
+            <div *ngIf="!(this.integrantes.length > 0)" class="card-body bg-light some-padding text-center">
               <button class="btn btn-success" (click)="redirecionarAddIntegrante()">+ Add integrante</button>
             </div>
           </div> <!-- / card  -->

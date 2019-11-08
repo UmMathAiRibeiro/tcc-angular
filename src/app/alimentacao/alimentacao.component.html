@@ -8,15 +8,15 @@
 
   <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="[ '/home']">Home<span class="sr-only">(página
-            atual)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[ '/home']">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="[ '/integrantes']">Integrantes</a>
       </li>
-      <li class="nav-item">
-        <a [routerLink]="['/alimentacao']" class="nav-link">Alimentação</a>
+      <li class="nav-item active">
+        <a [routerLink]="['/alimentacao']" class="nav-link">Alimentação<span class="sr-only">(página
+            atual)</span></a>
       </li>
       <li class="nav-item">
         <a [routerLink]="['/receitas']" class="nav-link">Receitas</a>
@@ -40,6 +40,29 @@
     </nav>
   </div>
 </nav>
-<div class="container shadow-lg p-3 mt-5 bg-white rounded">
-  Olá {{usuario.nome}}! Seja bem vindo ao Família Saudavel
+<div class="container">
+  <div class="shadow p-3 mt-5 bg-light">
+    <div class="card bg-light text-dark border-0">
+      <div class="card-header text-center bg-light h2">Alimentação</div>
+      <div *ngIf="this.integrantes.length > 0" class="card-body bg-light some-padding">
+        <div class="row">
+          <div class="card m-1" *ngFor="let integrante of integrantes" style="max-width: 21rem;">
+            <div class="card-header h5">{{integrante.nome}}</div>
+            <div class="card-body">
+              <h5 class="card-title">Receitas recomendadas para o dia</h5>
+              <!-- <h6 class="card-subtitle mb-2 text-muted">{{integrante.classificacao}}</h6> -->
+              <div class="card-text">
+                Café da manhã: <br>
+                Almoço: <br>
+                Janta:
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- / card-body -->
+      <div *ngIf="!(this.integrantes.length > 0)" class="card-body bg-light some-padding text-center">
+        <button class="btn btn-success" (click)="redirecionarAddIntegrante()">+ Add integrante</button>
+      </div>
+    </div>
+  </div>
 </div>

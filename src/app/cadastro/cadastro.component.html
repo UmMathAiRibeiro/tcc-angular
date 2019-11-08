@@ -53,8 +53,8 @@
       <input type="password" class="form-control" id="exampleInputPasswordConfirm" placeholder="CONFIRME A SENHA"
         [(ngModel)]="usuario.confirmSenha" [ngModelOptions]="{standalone: true}">
     </div>
-    <a (click)="cadastrar()" class="btn btn-success" style="color: white;">
+    <button (click)="cadastrar()" type="submit" class="btn btn-success" style="color: white;">
       CRIAR
-    </a>
+    </button>
   </form>
 </div>
