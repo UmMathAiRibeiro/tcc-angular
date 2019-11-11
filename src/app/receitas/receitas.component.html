@@ -66,10 +66,14 @@
                 <div class="form-group">
                   <label for="ingredientes">Ingredientes</label>
                   <div class="form-inline">
-                    <select class="form-control mr-2" id="ingredientes">
-                      <option value="A">A</option>
+                    <select class="form-control mr-2" [(ngModel)]="ingredienteSelecionado"
+                      [ngModelOptions]="{standalone: true}" id="ingredientes">
+                      <option *ngFor="let ingrediente of ingredientes" [value]="ingrediente.id">
+                        {{ingrediente.nome}}
+                      </option>
                     </select>
-                    <button class="btn btn-success mr-2">+</button>
+                    <button class="btn btn-success mr-2"
+                      (click)="addIngredienteReceita(ingredienteSelecionado)">+</button>
                     <button type="button" class="btn btn-outline-success">Adicionar um novo ingrediente</button>
                   </div>
                 </div>
@@ -78,11 +82,12 @@
                     <li class="list-group-item bg-success">
                       <h5 class="text-center text-light">Ingredientes selecionados</h5>
                     </li>
-                    <li class="list-group-item">
+                    <li *ngFor="let ingrediente of ingredidenteEmUso" class="list-group-item">
                       <div class="form-inline row">
-                        <label for="quantidade">Nome ingrediente</label>
-                        <input type="number" class="form-control m-3" id="quantidade" placeholder="Qtde">
-                        <button class="btn btn-danger float-lg-right">Retirar</button>
+                        <label for="quantidade">{{ingrediente.nome}}({{ingrediente.tipo_und}})</label>
+                        <input type="number" class="form-control m-3" id="quantidade" min=1 value=1 placeholder="Qtde">
+                        <button class="btn btn-danger float-lg-right"
+                          (click)="retirarIngrediente(ingrediente.id)">Retirar</button>
                       </div>
                     </li>
                   </ul>
@@ -104,7 +109,6 @@
           <div class="card bg-light text-dark border-0">
             <div class="card-header text-center bg-light h2">Receitas</div>
             <div class="card-body bg-light some-padding">
-
             </div> <!-- / card-body -->
           </div>
         </div>

@@ -55,7 +55,7 @@ export class IntegrantesComponent implements OnInit {
         swal(
           "ERRO",
           "Ocorreu um erro em nossos servidores por favor contate o suporte",
-          "erro"
+          "error"
         );
       } else {
         res.json().result.forEach(integrante => {

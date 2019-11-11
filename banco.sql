@@ -16,55 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `alimento`
+-- Table structure for table `ingrediente`
 --
 
-DROP TABLE IF EXISTS `alimento`;
+DROP TABLE IF EXISTS `ingrediente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `alimento` (
+CREATE TABLE `ingrediente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
-  `cal_p_und` int(11) NOT NULL,
+  `cal_p_und` float NOT NULL,
+  `tipo_und` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `alimentos_alergicos`
---
-
-DROP TABLE IF EXISTS `alimentos_alergicos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `alimentos_alergicos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idalimento` int(11) NOT NULL,
-  `idintegrante` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idalimento_idx` (`idalimento`),
-  KEY `idintegrante_idx` (`idintegrante`),
-  CONSTRAINT `idintegrante` FOREIGN KEY (`idintegrante`) REFERENCES `integrante` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `alimentos_indesejaveis`
---
-
-DROP TABLE IF EXISTS `alimentos_indesejaveis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `alimentos_indesejaveis` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idalimento` int(11) NOT NULL,
-  `idintegrante` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idintegrante_idx` (`idintegrante`),
-  KEY `idalimento_idx` (`idalimento`),
-  CONSTRAINT `idalimento_` FOREIGN KEY (`idalimento`) REFERENCES `alimento` (`id`),
-  CONSTRAINT `idintegrante_` FOREIGN KEY (`idintegrante`) REFERENCES `integrante` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +51,43 @@ CREATE TABLE `integrante` (
   PRIMARY KEY (`id`),
   KEY `iduser_idx` (`iduser`),
   CONSTRAINT `iduser` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `receita`
+--
+
+DROP TABLE IF EXISTS `receita`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `receita` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `modo_preparo` varchar(1000) NOT NULL,
+  `calorias` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `receita_aux`
+--
+
+DROP TABLE IF EXISTS `receita_aux`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `receita_aux` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_receita` int(11) NOT NULL,
+  `id_ingrediente` int(11) NOT NULL,
+  `qtde` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `receita_aux_idx` (`id_receita`),
+  KEY `ingrediente_aux_idx` (`id_ingrediente`),
+  CONSTRAINT `ingrediente_aux` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingrediente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `receita_aux` FOREIGN KEY (`id_receita`) REFERENCES `receita` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `user` (
   `email` varchar(255) DEFAULT NULL,
   `senha` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -116,4 +116,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-18 12:15:23
+-- Dump completed on 2019-11-11 12:21:28

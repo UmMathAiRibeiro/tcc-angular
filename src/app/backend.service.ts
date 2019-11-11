@@ -40,5 +40,14 @@ export class BackendService {
   selecionaIngredientes() {
     return this.http.get(URL + "/selecionaIngredientes");
   }
+  adicionarIngredientes(data) {
+    return this.http.post(URL + "/adicionarIngredientes", data);
+  }
+  listarReceitas() {
+    return this.http.get(URL + "/listarReceitas");
+  }
+  adicionarReceitas(data) {
+    return this.http.post(URL + "/adicionarReceitas", data);
+  }
   //---------------------------------------------------
 }
