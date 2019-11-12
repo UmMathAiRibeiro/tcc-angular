@@ -13,6 +13,18 @@ export class ReceitasComponent implements OnInit {
   public receitas = [];
   public ingredienteSelecionado;
   public ingredidenteEmUso = [];
+  public novo_ingrediente = {
+    nome: null,
+    cal_p_und: null,
+    tipo_und: null
+  };
+  public nova_receita = {
+    nome: null,
+    modo_preparo: null,
+    calorias: null,
+    ingredientes: this.ingredidenteEmUso
+  };
+  public contador_receita = 1;
   constructor(private service: BackendService, private router: Router) {}
 
   ngOnInit() {
@@ -39,6 +51,7 @@ export class ReceitasComponent implements OnInit {
         );
       } else {
         res.json().result.forEach(ingrediente => {
+          ingrediente["qtde"] = 1;
           this.ingredientes.push(ingrediente);
         });
       }
@@ -52,6 +65,7 @@ export class ReceitasComponent implements OnInit {
         );
       } else {
         res.json().result.forEach(receita => {
+          this.contador_receita++;
           this.receitas.push(receita);
         });
       }
@@ -82,6 +96,66 @@ export class ReceitasComponent implements OnInit {
       if (ingrediente.id == id_ingrediente) {
         this.ingredidenteEmUso.splice(contador, 1);
         id_ingrediente = -10;
+      }
+    });
+  }
+  adicionarIngredientes() {
+    let data = this.novo_ingrediente;
+    this.service.adicionarIngredientes(data).subscribe(res => {
+      if (res.json().status == 500) {
+        swal(
+          "ERRO",
+          "Ocorreu um erro em nossos servidores por favor contate o suporte",
+          "error"
+        );
+      } else {
+        swal("SUCESSO", "Ingrediente cadastrado com sucesso", "success").then(
+          () => {
+            window.location.reload();
+          }
+        );
+      }
+    });
+  }
+  adicionarReceita() {
+    let idreceita = this.contador_receita;
+    let calorias = 0;
+    this.ingredidenteEmUso.forEach(ingredientes => {
+      calorias += ingredientes.cal_p_und * ingredientes.qtde;
+    });
+    let data = {
+      id_receita: idreceita,
+      ingredientesEmUso: this.ingredidenteEmUso,
+      nome: this.nova_receita.nome,
+      modo_preparo: this.nova_receita.modo_preparo,
+      calorias: calorias
+    };
+    swal({
+      title: "Quantidade de calorias",
+      text:
+        "A sua receita tem aproximadamente " +
+        data.calorias +
+        ", deseja continuar?",
+      icon: "warning",
+      buttons: ["Cancelar", true],
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        this.service.adicionarReceitas(data).subscribe(res => {
+          if (res.json().status == 500) {
+            swal(
+              "ERRO",
+              "Ocorreu um erro em nossos servidores por favor contate o suporte",
+              "error"
+            );
+          } else {
+            swal("SUCESSO", "Receita cadastrada com sucesso", "success").then(
+              () => {
+                window.location.reload();
+              }
+            );
+          }
+        });
       }
     });
   }

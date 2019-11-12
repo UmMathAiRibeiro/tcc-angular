@@ -61,7 +61,8 @@
               <form>
                 <div class="form-group">
                   <label for="nomeReceita">Nome receita</label>
-                  <input type="text" class="form-control" id="nomeReceita" placeholder="Digite o nome da receita">
+                  <input type="text" name="nomeReceita" [(ngModel)]="nova_receita.nome" class="form-control"
+                    id="nomeReceita" placeholder="Digite o nome da receita">
                 </div>
                 <div class="form-group">
                   <label for="ingredientes">Ingredientes</label>
@@ -74,7 +75,13 @@
                     </select>
                     <button class="btn btn-success mr-2"
                       (click)="addIngredienteReceita(ingredienteSelecionado)">+</button>
-                    <button type="button" class="btn btn-outline-success">Adicionar um novo ingrediente</button>
+                    <!-- Botão para acionar modal -->
+                    <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                      data-target="#modalExemplo">
+                      Adicionar um novo ingrediente
+                    </button>
+                    <!-- Modal -->
+
                   </div>
                 </div>
                 <div class="form-group">
@@ -85,7 +92,8 @@
                     <li *ngFor="let ingrediente of ingredidenteEmUso" class="list-group-item">
                       <div class="form-inline row">
                         <label for="quantidade">{{ingrediente.nome}}({{ingrediente.tipo_und}})</label>
-                        <input type="number" class="form-control m-3" id="quantidade" min=1 value=1 placeholder="Qtde">
+                        <input type="number" name="qtde" [(ngModel)]="ingrediente.qtde" class="form-control m-3"
+                          id="quantidade" min=1 value=1 placeholder="Qtde">
                         <button class="btn btn-danger float-lg-right"
                           (click)="retirarIngrediente(ingrediente.id)">Retirar</button>
                       </div>
@@ -95,10 +103,56 @@
 
                 <div class="form-group">
                   <label for="modo_preparo">Modo de preparo</label>
-                  <textarea class="form-control" id="modo_preparo" rows="3" maxlength="1000"></textarea>
+                  <textarea class="form-control" [(ngModel)]="nova_receita.modo_preparo" name="modo_preparo"
+                    id="modo_preparo" rows="3" maxlength="1000"></textarea>
                 </div>
               </form>
             </div> <!-- / card-body -->
+            <div class="modal-footer">
+              <button (click)="adicionarReceita()">adicionar receita</button>
+            </div>
+          </div>
+        </div>
+        <!-- MODAL ADICIONAR UM INGREDIENTE -->
+        <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Novo ingrediente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="font120">
+                  <div class="form-group">
+                    <label for="nome-ingrediente">Nome do ingrediente</label>
+                    <input type="text" [(ngModel)]="novo_ingrediente.nome" name="nome-ingrediente"
+                      class="form-control text-dark" id="nome-ingrediente" placeholder="Nome do ingrediente">
+                  </div>
+                  <div class="form-group">
+                    <label for="tipo-unidade">Tipo da unidade</label>
+                    <input class="form-control" aria-describedby="ajuda-tipo-unidade"
+                      [(ngModel)]="novo_ingrediente.tipo_und" name="tipo-unidade" id="tipo-unidade"
+                      placeholder="Tipo da unidade">
+                    <small id="ajuda-tipo-unidade" class="form-text text-muted">
+                      Ex: 100 gramas, 1 caixa, etc... (lembrando que será calculado as calorias em base a o tipo de
+                      unidade).
+                    </small>
+                  </div>
+                  <div class="form-group">
+                    <label for="calorias-unidade">Calorias por unidade</label>
+                    <input type="number" min="0" name="calorias-unidade" [(ngModel)]="novo_ingrediente.cal_p_und"
+                      class="form-control text-dark" id="calorias-unidade" placeholder="Calorias por unidade">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" (click)="adicionarIngredientes()">Cadastrar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
