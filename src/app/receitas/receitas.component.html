@@ -42,17 +42,17 @@
 </nav>
 <ul class="nav fixed-bottom  nav-tabs bg-light" id="myTab" role="tablist" style="justify-content:center;">
   <li class="nav-item">
-    <a class="nav-link active text-dark" id="AddReceitas-tab" data-toggle="tab" href="#AddReceitas" role="tab"
+    <a class="nav-link text-dark" id="AddReceitas-tab" data-toggle="tab" href="#AddReceitas" role="tab"
       aria-controls="AddReceitas" aria-selected="true">Adicionar receita</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link text-dark" id="receitas-tab" data-toggle="tab" href="#receitas" role="tab"
+    <a class="nav-link active text-dark" id="receitas-tab" data-toggle="tab" href="#receitas" role="tab"
       aria-controls="receitas" aria-selected="false">Receitas</a>
   </li>
 </ul>
 <div class="content">
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade  show active" id="AddReceitas" role="tabpanel" aria-labelledby="AddReceitas-tab">
+    <div class="tab-pane fade" id="AddReceitas" role="tabpanel" aria-labelledby="AddReceitas-tab">
       <div class="container">
         <div class="shadow p-3 mt-5 bg-light">
           <div class="card bg-light text-dark border-0">
@@ -109,7 +109,7 @@
               </form>
             </div> <!-- / card-body -->
             <div class="modal-footer">
-              <button (click)="adicionarReceita()">adicionar receita</button>
+              <button class="btn btn-success" (click)="adicionarReceita()">Adicionar receita</button>
             </div>
           </div>
         </div>
@@ -157,13 +157,26 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="receitas" role="tabpanel" aria-labelledby="receitas-tab">
+    <div class="tab-pane fade show active" id="receitas" role="tabpanel" aria-labelledby="receitas-tab">
       <div class="container">
         <div class="shadow p-3 mt-5 bg-light">
           <div class="card bg-light text-dark border-0">
             <div class="card-header text-center bg-light h2">Receitas</div>
             <div class="card-body bg-light some-padding">
-            </div> <!-- / card-body -->
+              <div class="form-group">
+                <label for="receitas">Receitas existentes</label>
+                <div class="row">
+                  <div class="col-10">
+                    <input class="form-control" id="receitasFiltro" name="receitasFiltro" [(ngModel)]="receitasFiltro">
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-outline-success" (click)="pesquisar_receitas()">Pesquisar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="receitaOn" class="card-footer bg-light">
+            </div>
           </div>
         </div>
       </div>

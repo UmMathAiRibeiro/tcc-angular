@@ -10,8 +10,9 @@ import swal from "sweetalert";
 })
 export class ReceitasComponent implements OnInit {
   public ingredientes = [];
-  public receitas = [];
+  public receitasBanco = [];
   public ingredienteSelecionado;
+  public receitas = [];
   public ingredidenteEmUso = [];
   public novo_ingrediente = {
     nome: null,
@@ -25,6 +26,9 @@ export class ReceitasComponent implements OnInit {
     ingredientes: this.ingredidenteEmUso
   };
   public contador_receita = 1;
+  public receitasFiltro;
+  public receitaOn = false;
+  public receitasFitradas = [];
   constructor(private service: BackendService, private router: Router) {}
 
   ngOnInit() {
@@ -66,11 +70,23 @@ export class ReceitasComponent implements OnInit {
       } else {
         res.json().result.forEach(receita => {
           this.contador_receita++;
-          this.receitas.push(receita);
+          this.receitasBanco.push(receita);
         });
       }
-      console.log(this.receitas);
+      console.log(this.receitasBanco);
+      this.receitasBanco.forEach(receitaBanco => {
+        if (this.receitas.length > 0) {
+          this.receitas.forEach(receitas => {
+            if (receitaBanco.nome_receita != receitas.nome_receita) {
+              this.receitas.push(receitaBanco);
+            }
+          });
+        } else {
+          this.receitas.push(receitaBanco);
+        }
+      });
     });
+    console.log(this.receitas);
   }
   sair() {
     sessionStorage.removeItem("01100011");
@@ -158,5 +174,18 @@ export class ReceitasComponent implements OnInit {
         });
       }
     });
+  }
+  pesquisar_receitas() {
+    this.receitaOn = true;
+    this.receitasBanco.forEach(receitaBanco => {
+      this.receitas.forEach(receita => {
+        if (receita.receita_id == receitaBanco.receita_id) {
+          this.receitasFitradas.push({
+            ingrediente_id: receitaBanco.ingrediente_id
+          });
+        }
+      });
+    });
+    console.log(this.receitasFitradas);
   }
 }
