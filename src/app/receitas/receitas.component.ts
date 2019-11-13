@@ -73,20 +73,42 @@ export class ReceitasComponent implements OnInit {
           this.receitasBanco.push(receita);
         });
       }
-      console.log(this.receitasBanco);
       this.receitasBanco.forEach(receitaBanco => {
         if (this.receitas.length > 0) {
           this.receitas.forEach(receitas => {
             if (receitaBanco.nome_receita != receitas.nome_receita) {
-              this.receitas.push(receitaBanco);
+              this.receitas.push({
+                receita_id: receitaBanco.receita_id,
+                nome_receita: receitaBanco.nome_receita,
+                calorias: receitaBanco.calorias,
+                ingredientes: []
+              });
             }
           });
         } else {
-          this.receitas.push(receitaBanco);
+          this.receitas.push({
+            receita_id: receitaBanco.receita_id,
+            nome_receita: receitaBanco.nome_receita,
+            calorias: receitaBanco.calorias,
+            ingredientes: []
+          });
         }
       });
+      this.receitas.forEach(receita => {
+        var ingredienteReceita = [];
+        this.receitasBanco.forEach(ingrediente => {
+          if (receita.receita_id == ingrediente.receita_id) {
+            ingredienteReceita.push({
+              nome_ingrediente: ingrediente.nome_ingrediente,
+              qtde: ingrediente.qtde,
+              tipo_und: ingrediente.tipo_und,
+              cal_p_und: ingrediente.cal_p_und
+            });
+          }
+        });
+        receita.ingredientes = ingredienteReceita;
+      });
     });
-    console.log(this.receitas);
   }
   sair() {
     sessionStorage.removeItem("01100011");
@@ -177,15 +199,5 @@ export class ReceitasComponent implements OnInit {
   }
   pesquisar_receitas() {
     this.receitaOn = true;
-    this.receitasBanco.forEach(receitaBanco => {
-      this.receitas.forEach(receita => {
-        if (receita.receita_id == receitaBanco.receita_id) {
-          this.receitasFitradas.push({
-            ingrediente_id: receitaBanco.ingrediente_id
-          });
-        }
-      });
-    });
-    console.log(this.receitasFitradas);
   }
 }

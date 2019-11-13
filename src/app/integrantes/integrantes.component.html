@@ -85,6 +85,14 @@
                       placeholder="Altura em centimetros" [(ngModel)]="integrante.altura"
                       [ngModelOptions]="{standalone: true}">
                   </div>
+                  <div class="col">
+                    <label for="sexo-integrante">Sexo</label>
+                    <select class="form-control text-dark font100" id="sexo-integrante" [(ngModel)]="integrante.sexo"
+                      name="sexo-integrante">
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                  </div>
                 </div>
               </form>
             </div> <!-- / card-body -->

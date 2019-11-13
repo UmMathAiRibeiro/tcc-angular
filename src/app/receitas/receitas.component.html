@@ -175,7 +175,24 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="receitaOn" class="card-footer bg-light">
+            <div *ngIf="receitaOn">
+              <div *ngFor="let receita of receitas" class="card-footer bg-light">
+                <div class="card ">
+                  <div class="card-header h5 text-center">
+                    {{receita.nome_receita}}
+                  </div>
+                  <div class="card-body">
+                    <div class="card-text">
+                      <div *ngFor="let ingrediente of receita.ingredientes">
+                        {{ingrediente.qtde}} x {{ingrediente.tipo_und}} de {{ingrediente.nome_ingrediente}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-muted">
+                    {{receita.calorias}}kcal
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

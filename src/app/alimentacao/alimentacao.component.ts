@@ -37,16 +37,49 @@ export class AlimentacaoComponent implements OnInit {
         swal(
           "ERRO",
           "Ocorreu um erro em nossos servidores por favor contate o suporte",
-          "erro"
+          "error"
         );
       } else {
         res.json().result.forEach(integrante => {
-          integrante["peso_ideal"] = Math.round(
-            21 * Math.pow(integrante.altura * 0.01, 2)
-          );
+          integrante["idade"] =
+            new Date().getFullYear() - integrante.data_nasc.split("-")[0];
+          if (integrante.sexo == "Masculino") {
+            integrante["TMB"] = Math.round(
+              1.2 *
+                (66.5 +
+                  13.8 * integrante.peso +
+                  5 * integrante.altura -
+                  6.8 * integrante["idade"])
+            );
+          } else {
+            integrante["TMB"] = Math.round(
+              1.2 *
+                (665 +
+                  9.6 * integrante.peso +
+                  1.8 * integrante.altura -
+                  4.7 * integrante["idade"])
+            );
+          }
+          if (integrante.objetivo == "Ganhar peso") {
+            integrante["peso_ideal"] = Math.round(
+              19 * Math.pow(integrante.altura * 0.01, 2)
+            );
+            integrante["kcal_p_d"] = Math.round(integrante["TMB"] + 500);
+          } else if (integrante.objetivo == "Perder peso") {
+            integrante["peso_ideal"] = Math.round(
+              25 * Math.pow(integrante.altura * 0.01, 2)
+            );
+            integrante["kcal_p_d"] = Math.round(integrante["TMB"] - 500);
+          } else if (integrante.objetivo == "Manter peso") {
+            integrante["peso_ideal"] = Math.round(
+              25 * Math.pow(integrante.altura * 0.01, 2)
+            );
+            integrante["kcal_p_d"] = Math.round(integrante["TMB"]);
+          }
           this.integrantes.push(integrante);
         });
       }
+      console.log(this.integrantes);
     });
   }
   sair() {
