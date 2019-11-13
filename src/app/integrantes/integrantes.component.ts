@@ -51,6 +51,9 @@ export class IntegrantesComponent implements OnInit {
         "01101001 01100100 01110101 01110011 01100101 01110010"
       )
     };
+    // 35% -- café da manha
+    // 25% -- janta
+    // 40% -- almoco
     this.service.listarIntegrantes(data).subscribe(res => {
       if (res.json().status == 500) {
         swal(

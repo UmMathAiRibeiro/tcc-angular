@@ -46,11 +46,19 @@
       <div class="card-header text-center bg-light h2">Alimentação</div>
       <div *ngIf="this.integrantes.length > 0" class="card-body bg-light some-padding">
         <div class="row">
-          <div class="card m-1" *ngFor="let integrante of integrantes" style="max-width: 21rem;">
+          <div class="card m-1" *ngFor="let integrante of integrantes" style="width: 21rem;">
             <div class="card-header h5">{{integrante.nome}}</div>
             <div class="card-body">
-              <h5 class="card-title">Receitas recomendadas para o dia</h5>
-              <!-- <h6 class="card-subtitle mb-2 text-muted">{{integrante.classificacao}}</h6> -->
+              <h5 class="card-title">Recomendações diárias</h5>
+              <h6 class="card-subtitle mb-2 text-muted" *ngIf="integrante.objetivo == 'Perder peso'">
+                {{integrante.kcal_p_d}} kcal ou menos durante o dia
+              </h6>
+              <h6 class="card-subtitle mb-2 text-muted" *ngIf="integrante.objetivo == 'Manter peso'">
+                {{integrante.kcal_p_d}} kcal durante o dia
+              </h6>
+              <h6 class="card-subtitle mb-2 text-muted" *ngIf="integrante.objetivo == 'Ganhar peso'">
+                {{integrante.kcal_p_d}} kcal ou mais durante o dia
+              </h6>
               <div class="card-text">
                 Café da manhã: <br>
                 Almoço: <br>

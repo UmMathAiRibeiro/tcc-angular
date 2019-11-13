@@ -1,11 +1,11 @@
-import { ReceitasComponent } from "./receitas/receitas.component";
-import { AlimentacaoComponent } from "./alimentacao/alimentacao.component";
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./login/login.component";
-import { HomeComponent } from "./home/home.component";
+import { RouterModule, Routes } from "@angular/router";
+import { AlimentacaoComponent } from "./alimentacao/alimentacao.component";
 import { CadastroComponent } from "./cadastro/cadastro.component";
+import { HomeComponent } from "./home/home.component";
 import { IntegrantesComponent } from "./integrantes/integrantes.component";
+import { LoginComponent } from "./login/login.component";
+import { ReceitasComponent } from "./receitas/receitas.component";
 
 const routes: Routes = [
   { path: "", component: LoginComponent },

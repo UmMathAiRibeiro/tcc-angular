@@ -76,12 +76,13 @@
                     <button class="btn btn-success mr-2"
                       (click)="addIngredienteReceita(ingredienteSelecionado)">+</button>
                     <!-- Botão para acionar modal -->
-                    <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                    <button type="button" class="btn btn-outline-success mr-2" data-toggle="modal"
                       data-target="#modalExemplo">
                       Adicionar um novo ingrediente
                     </button>
-                    <!-- Modal -->
-
+                    <label for="porcoes">Nº de porções</label>
+                    <input type="nuber" class="form-control" name="porcoes" id="porcoes"
+                      [(ngModel)]="nova_receita.porcoes" />
                   </div>
                 </div>
                 <div class="form-group">
@@ -149,7 +150,8 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" id="fecharModalIngredientes"
+                  data-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-success" (click)="adicionarIngredientes()">Cadastrar</button>
               </div>
             </div>
@@ -170,27 +172,47 @@
                     <input class="form-control" id="receitasFiltro" name="receitasFiltro" [(ngModel)]="receitasFiltro">
                   </div>
                   <div class="col">
-                    <button class="btn btn-outline-success" (click)="pesquisar_receitas()">Pesquisar</button>
+                    <button type="submit" class="btn btn-outline-success"
+                      (click)="pesquisar_receitas()">Pesquisar</button>
                   </div>
                 </div>
               </div>
+              <div class="form-inline">
+                <div class="form-check">
+                  <input type="radio" class="mr-1" checked id="radio-filtro-1" name="radio-filtro"
+                    value="receita"><label for="radio-filtro-1" class="mr-2">Nome receita</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="mr-1" id="radio-filtro-2" name="radio-filtro" value="ingrediente"><label
+                    for="radio-filtro-2" class="mr-2">Nome ingrediente</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" class="mr-1" id="radio-filtro-3" name="radio-filtro" value="calorias"><label
+                    for="radio-filtro-3" class="mr-2">Calorias por porção</label>
+                </div>
+              </div>
             </div>
-            <div *ngIf="receitaOn">
-              <div *ngFor="let receita of receitas" class="card-footer bg-light">
-                <div class="card ">
-                  <div class="card-header h5 text-center">
-                    {{receita.nome_receita}}
-                  </div>
-                  <div class="card-body">
-                    <div class="card-text">
+            <div *ngFor="let receita of receitasFitradas" class="card-footer bg-light">
+              <div class="card ">
+                <div class="card-header h5 text-center">
+                  {{receita.nome_receita}}
+                </div>
+                <div class="card-body">
+                  <div class="card-text row">
+                    <div class="col-sm">
                       <div *ngFor="let ingrediente of receita.ingredientes">
                         {{ingrediente.qtde}} x {{ingrediente.tipo_und}} de {{ingrediente.nome_ingrediente}}
                       </div>
                     </div>
+                    <div class="col-lg">
+                      <textarea class="form-control" name="modo_preparo" id="modo_preparo" rows="7"
+                        disabled>{{receita.modo_preparo}}</textarea>
+
+                    </div>
                   </div>
-                  <div class="card-footer text-muted">
-                    {{receita.calorias}}kcal
-                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  Rende {{receita.porcoes}} porções de {{receita.kcal_p_p}} calorias cada.
                 </div>
               </div>
             </div>
