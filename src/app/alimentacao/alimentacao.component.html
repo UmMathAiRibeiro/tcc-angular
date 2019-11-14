@@ -27,11 +27,10 @@
         <li class="nav-item">
           <div class="dropleft" id="config-user-dropleft">
             <!-- <button tye="button" class="btn btn-outline-success" id="config-user" data-toggle="dropdown"> -->
-            <i class="material-icons sair" id="config-user" data-toggle="dropdown">build</i>
+            <i class="material-icons sair" id="config-user" data-toggle="dropdown">exit_to_app</i>
             <!-- </button> -->
             <div class="dropdown-menu">
-              <a class="dropdown-item sair" [routerLink]="[ '/perfil']">Ver perfil</a>
-              <a class="dropdown-item sair" [routerLink]="[ '/alterarPerfil']">Mudar Dados</a>
+
               <a class="dropdown-item sair" (click)="sair()">Sair</a>
             </div>
           </div>
@@ -60,9 +59,36 @@
                 {{integrante.kcal_p_d}} kcal ou mais durante o dia
               </h6>
               <div class="card-text">
-                Café da manhã: <br>
-                Almoço: <br>
-                Janta:
+                <div class="row">
+                  <div class="col">
+                    Café da manhã:
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-sm btn-outline-success" (click)="pesquisa_receita(integrante.caf_manha)">
+                      {{integrante.caf_manha}}
+                    </button>
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-sm">
+                    Almoço:
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-sm btn-outline-success" (click)="pesquisa_receita(integrante.almoco)">
+                      {{integrante.almoco}}
+                    </button>
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-sm">
+                    Janta:
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-sm btn-outline-success" (click)="pesquisa_receita(integrante.janta)">
+                      {{integrante.janta}}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

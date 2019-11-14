@@ -76,6 +76,13 @@ export class AlimentacaoComponent implements OnInit {
             );
             integrante["kcal_p_d"] = Math.round(integrante["TMB"]);
           }
+          integrante["caf_manha"] = Math.round(
+            integrante["kcal_p_d"] * (35 / 100)
+          );
+          integrante["almoco"] = Math.round(
+            integrante["kcal_p_d"] * (40 / 100)
+          );
+          integrante["janta"] = Math.round(integrante["kcal_p_d"] * (25 / 100));
           this.integrantes.push(integrante);
         });
       }
@@ -92,5 +99,9 @@ export class AlimentacaoComponent implements OnInit {
   }
   redirecionarAddIntegrante() {
     this.router.navigate(["integrantes"]);
+  }
+  pesquisa_receita(calorias) {
+    localStorage.setItem("cal_pesquisa", calorias);
+    this.router.navigate(["receitas"]);
   }
 }

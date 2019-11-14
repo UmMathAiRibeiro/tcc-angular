@@ -87,6 +87,7 @@ CREATE TABLE `receita` (
   `nome` varchar(100) NOT NULL,
   `modo_preparo` varchar(1000) NOT NULL,
   `calorias` int(11) DEFAULT NULL,
+  `porcoes` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -97,7 +98,7 @@ CREATE TABLE `receita` (
 
 LOCK TABLES `receita` WRITE;
 /*!40000 ALTER TABLE `receita` DISABLE KEYS */;
-INSERT INTO `receita` VALUES (1,'Risoto Simples de Frango','\n3 dentes de alho amassados \n1 xícara (chá) de cebola picada \n1 colher (sopa) de óleo \n1 1/2 xícara (chá) de arroz lavado e escorrido \nSal e pimenta do reino a gosto \n1 xícara (chá) de frango cozido e desfiado \n3 xícaras (chá) de água fervente \n200g de salsichas ferventadas e picadas \n2 colheres (sopa) de extrato de tomate\n\nEm uma panela, em fogo médio, frite o alho e a cebola no óleo.\nAcrescente o arroz, tempere com sal e pimenta e continue fritando.\nColoque o frango, a água e o extrato de tomate.\nAbaixe o fogo e deixe cozinhar até secar a água, com a panela semi tampada.\nDesligue o fogo, misture as salsichas, deixe descansar por 15 minutos e sirva.\n',1500),(8,'OVO','METE O LOUCO',936);
+INSERT INTO `receita` VALUES (1,'Risoto Simples de Frango','Em uma panela, em fogo médio, frite o alho e a cebola no óleo.\r Acrescente o arroz, tempere com sal e pimenta e continue fritando.\r Coloque o frango, a água e o extrato de tomate.\r Abaixe o fogo e deixe cozinhar até secar a água, com a panela semi tampada.\r Desligue o fogo, misture as salsichas, deixe descansar por 15 minutos e sirva.\r ',1500,5);
 /*!40000 ALTER TABLE `receita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +128,7 @@ CREATE TABLE `receita_aux` (
 
 LOCK TABLES `receita_aux` WRITE;
 /*!40000 ALTER TABLE `receita_aux` DISABLE KEYS */;
-INSERT INTO `receita_aux` VALUES (1,1,8,3),(2,1,10,1),(3,1,5,1),(4,1,6,1),(5,1,1,3),(6,1,2,200),(7,1,3,2),(8,8,23,12);
+INSERT INTO `receita_aux` VALUES (1,1,8,3),(2,1,10,1),(3,1,5,1),(4,1,6,1),(5,1,1,3),(6,1,2,200),(7,1,3,2);
 /*!40000 ALTER TABLE `receita_aux` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-13 12:12:29
+-- Dump completed on 2019-11-14 12:50:13

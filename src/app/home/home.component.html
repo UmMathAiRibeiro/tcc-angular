@@ -27,11 +27,10 @@
         <li class="nav-item">
           <div class="dropleft" id="config-user-dropleft">
             <!-- <button tye="button" class="btn btn-outline-success" id="config-user" data-toggle="dropdown"> -->
-            <i class="material-icons sair" id="config-user" data-toggle="dropdown">build</i>
+            <i class="material-icons sair" id="config-user" data-toggle="dropdown">exit_to_app</i>
             <!-- </button> -->
             <div class="dropdown-menu">
-              <a class="dropdown-item sair" [routerLink]="[ '/perfil']">Ver perfil</a>
-              <a class="dropdown-item sair" [routerLink]="[ '/alterarPerfil']">Mudar Dados</a>
+
               <a class="dropdown-item sair" (click)="sair()">Sair</a>
             </div>
           </div>
@@ -41,5 +40,33 @@
   </div>
 </nav>
 <div class="container shadow-lg p-3 mt-5 bg-white rounded">
-  Olá {{usuario.nome}}! Seja bem vindo ao Família Saudavel
+  <div class="card bg-light text-dark border-0">
+    <div class="card-header text-center bg-light h3">Olá {{usuario.nome}}! Seja bem vindo ao Família Saudavel</div>
+    <div class="card-body bg-light some-padding">
+      <div class="card-text">
+        <div class="row">
+          <div class="card bg-light text-dark ml-1" style="width: 21rem">
+            <div class="card-header text-center bg-light h5">
+              Família
+            </div>
+            <div class="card-body bg-light some-padding">
+              <div class="card-text">
+                Integrantes cadastrados no sistema: 5
+              </div>
+            </div> <!-- / card-body -->
+          </div>
+          <div class="card bg-light text-dark" style="width: 21rem">
+            <div class="card-header text-center bg-light h5">
+              Família
+            </div>
+            <div class="card-body bg-light some-padding">
+              <div class="card-text">
+                Integrantes cadastrados no sistema: 5
+              </div>
+            </div> <!-- / card-body -->
+          </div>
+        </div>
+      </div>
+    </div> <!-- / card-body -->
+  </div>
 </div>

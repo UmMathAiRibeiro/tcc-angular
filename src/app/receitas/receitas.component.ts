@@ -120,6 +120,19 @@ export class ReceitasComponent implements OnInit {
       });
     });
     this.receitasFitradas = this.receitas;
+    if (localStorage.getItem("cal_pesquisa")) {
+      this.receitasFiltro = localStorage.getItem("cal_pesquisa");
+      swal(
+        "Olá!",
+        "Aqui estão algumas receitas com base no seu gasto calórico na refeição escolhida(" +
+          this.receitasFiltro +
+          " kcal)",
+        "info"
+      ).then(() => {
+        localStorage.removeItem("cal_pesquisa");
+        this.pesquisar_receitas();
+      });
+    }
   }
   sair() {
     sessionStorage.removeItem("01100011");

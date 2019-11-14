@@ -98,6 +98,7 @@ export class IntegrantesComponent implements OnInit {
             );
             integrante["kcal_p_d"] = Math.round(integrante["TMB"]);
           }
+
           this.integrantes.push(integrante);
         });
       }
