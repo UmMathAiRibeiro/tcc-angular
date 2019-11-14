@@ -1,7 +1,9 @@
-import { Injectable } from "@angular/core";
+﻿import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 
-const URL = "http://localhost:3005"; //endereço do server
+// trocar para localhostDPS
+const URL = "http://server-familia-saudavel.herokuapp.com/"; //endereço do server
+
 
 @Injectable({
   providedIn: "root"
