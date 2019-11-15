@@ -2,6 +2,7 @@
 import { Http } from "@angular/http";
 
 // trocar para localhostDPS
+//http://localhost:3005 
 const URL = "http://server-familia-saudavel.herokuapp.com/"; //endereço do server
 
 
@@ -9,7 +10,7 @@ const URL = "http://server-familia-saudavel.herokuapp.com/"; //endereço do serv
   providedIn: "root"
 })
 export class BackendService {
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   //login
   logar(data) {
@@ -50,6 +51,9 @@ export class BackendService {
   }
   adicionarReceitas(data) {
     return this.http.post(URL + "/adicionarReceitas", data);
+  }
+  contarReceitas() {
+    return this.http.get(URL + "/contarReceitas");
   }
   //---------------------------------------------------
 }
